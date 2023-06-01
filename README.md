@@ -2,8 +2,8 @@
 | -------- | ---------------- |
 ![f](https://github.com/S0ulx3/NotBlock/blob/main/NotBlock.png)|![f](https://github.com/S0ulx3/NotBlock/blob/main/NotBlockIU.png)
 
-- [Español](#español)
-- [English](#english)
+- [Español](#Español)
+- [English](#English)
 
 ---------------------------------------------
 ### Español
