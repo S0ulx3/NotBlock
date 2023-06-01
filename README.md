@@ -5,7 +5,7 @@
 - [Español](#español)
 - [English](#english)
 
-
+---------------------------------------------
 ### Español
 # NotBlock
 Simula una aplicación de notas con sus funciones básicas
@@ -26,6 +26,11 @@ chmod +x NotBlock && ./NotBlock
 - Leer notas previamente creadas, y automaticamente guardadas en la carpeta Notas
 - Crear Nuevas notas, eligiendo el nombre y el contenido de la misma
 - Borrar notas creadas
+-----------------------------------------------------------------------
+
+
+
+
 -----------------------------------------------------------------------
 ### English
 # NotBlock
