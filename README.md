@@ -8,7 +8,7 @@
 ---------------------------------------------
 ### Español
 # NotBlock
-Simula una aplicación de notas con sus funciones básicas
+Script que simula un bloc de notas con funcionalidades basicas hecho en bash
 ----------------------------------------------
 # Instalación
 - Clonamos el repositorio:
@@ -34,7 +34,7 @@ chmod +x NotBlock && ./NotBlock
 -----------------------------------------------------------------------
 ### English
 # NotBlock
-Simulates a note application with its basic functions
+Script that simulates a notepad with basic functionalities made in bash
 --------------------------------------------
 # Instalation
 - Clone the repository:
