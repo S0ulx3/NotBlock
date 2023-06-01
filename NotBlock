@@ -1,0 +1,143 @@
+#!/bin/bash
+
+# Colores
+Rojo='\033[31m'
+Verde='\033[32m'
+Azul='\033[34m'
+Magenta='\033[35m'
+Cian='\033[36m'
+NC='033[39m'
+
+# Carpeta de notas
+mkdir -p Notas
+
+# Menú
+mostrar_menu() {
+  clear
+  echo -e "\e[34m|-----------------------|\e[0m"
+  echo -e "\e[34m|\e[0m\e[35mBienvenido a NotBlock\e[0m  \e[34m|\e[0m"
+  echo -e "\e[34m|-----------------------|\e[0m"
+  echo -e "\e[35m1.\e[0m \e[32mVer notas\e[0m            \e[34m|\e[0m"
+  echo -e "\e[34m|-----------------------|\e[0m"
+  echo -e "\e[35m2. \e[0m\e[32mCrear una nueva nota \e[34m|\e[0m"
+  echo -e "\e[34m|-----------------------|\e[0m"
+  echo -e "\e[35m3.\e[0m \e[31mBorrar nota\e[0m          \e[34m|\e[0m"
+  echo -e "\e[34m|-----------------------|\e[0m"
+  echo -e "\e[35m4.\e[0m \e[31mSalir\e[0m                \e[34m|\e[0m"
+  echo -e "\e[34m|-----------------------|\e[0m"
+}
+
+# Función para ver las notas existentes
+ver_notas() {
+  clear
+  echo
+  echo -e "\e[36m------- Leer Notas -------\e[0m"
+  echo
+
+if [ -z "$(ls -A Notas)" ]; then
+  echo -e "\e[31m----------------------------\e[0m"
+  echo -e "\e[31m[!]No hay notas disponibles \e[0m"
+  echo -e "\e[31m----------------------------\e[0m"
+  read -n 1 -s -r -p "Presiona cualquier tecla para volver al menú principal"
+  return
+fi
+
+  echo -e "\e[32m--------------------------\e[0m"
+  echo -e "\e[32m   -Notas Disponibles-    \e[0m"
+  echo -e "\e[32m--------------------------\e[0m"
+  echo
+  ls Notas
+  echo
+  echo -e "\e[32m--------------------------\e[0m"
+
+# Si hay notas se mostrarán aquí
+  read -p "Ingresa el nombre del archivho de notas que deseas leer: " Nota
+  if [ -f "Notas/$Nota" ]; then
+    clear
+    echo -e "\e[32m----------------------------\e[0m"
+    echo -e "\e[32mContenido de la nota (\e[31m$Nota\e[0m\e[32m)\e[0m"
+    echo -e "\e[32m----------------------------\e[0m"
+    cat "Notas/$Nota"
+  else
+    echo -e "\e[31m--------------------------\e[0m"
+    echo -e "\e[31mEl archivo de notas ($Nota) no existe.\e[0m"
+    echo -e "\e[31m--------------------------\e[0m"
+  fi
+
+
+  echo
+  read -n 1 -s -r -p "Presiona cualquier tecla para volver al menú principal"
+}
+
+# Función para crear una nueva nota
+crear_nota() {
+  clear
+  echo -e "\e[36m|---- Crear nueva nota ----|\e[0m"
+  read -p "Nombre de la nota: " nombre_archivo
+  echo -e "\e[36m|--------------------------|\e[0m"
+  read -p "Contenido de la nota: " contenido
+  echo -e "\e[36m|--------------------------|\e[0m"
+  echo "$contenido" > "Notas/$nombre_archivo"
+  echo -e "\e[36m|---------------------------------------------------|\e[0m"
+  echo -e "\e[32m     Nota\e[0m \e[31m$nombre_archivo\e[0m \e[32mcreada exitosamente en \e[36mNotas\e[0m"
+  echo -e "\e[36m|---------------------------------------------------|\e[0m"
+  read -n 1 -s -r -p "Presiona cualquier tecla para volver al menú principal"
+}
+
+# Función para borrar la nota deseada
+borrar_nota() {
+  clear
+ if [ -z "$(ls -A Notas)" ]; then
+  echo -e "\e[31m----------------------------\e[0m"
+  echo -e "\e[31m[!]No hay notas disponibles \e[0m"
+  echo -e "\e[31m----------------------------\e[0m"
+  read -n 1 -s -r -p "Presiona cualquier tecla para volver al menú principal"
+  return
+
+ fi
+  echo -e "\e[31m-----------------------------------\e[0m"
+  cd Notas
+  ls
+  echo -e "\e[31m-----------------------------------\e[0m"
+  read -p "Nombre de la nota que desea borrar: " del_note
+  echo -e "\e[31m-----------------------------------\e[0m"
+  rm $del_note
+  echo -e "\e[31m----------[!]Nota Eliminada---------\e[0m"
+  echo
+  read -n 1 -s -r -p "Presiona cualquier tecla para volver al menú principal"
+  cd ..
+}
+
+
+# Loop principal
+while true
+do
+  mostrar_menu
+  read -p "Selecciona una opción: " opcion
+
+  case $opcion in
+    1)
+      ver_notas
+      ;;
+    2)
+      crear_nota
+      ;;
+    3)
+      borrar_nota
+      ;;
+    4)
+      clear
+      echo -e "\e[35m|------------------|\e[0m"
+      echo -e "\e[35m|¡Hasta la proxima!|\e[0m"
+      echo -e "\e[35m|------------------|\e[0m"
+      exit 0
+      ;;
+
+    *)
+      echo -e "\e[31m---------------------------------------------------------\e[0m"
+      echo -e "\e[31mOpción inválida. Por favor, selecciona una opción válida.\e[0m"
+      echo -e "\e[31m---------------------------------------------------------\e[0m"
+      read -n 1 -s -r -p "Presiona cualquier tecla para volver al menú prncipal"
+      ;;
+  esac
+done
